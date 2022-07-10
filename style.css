@@ -1,0 +1,11 @@
+.grid {
+    width: 600px;
+    height: 300px;
+    border: #002A70 1px;
+}
+
+.block {
+    width: 100px;
+    height: 20px;
+    background-color: #00C4BC;
+}
