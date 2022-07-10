@@ -1,6 +1,7 @@
 const grid = document.querySelector('.grid') 
 const blockWidth = 100;
 const blockHeight = 20;
+const ballDiameter = 20;
 const boardWidth = 560;
 const boardHeight = 800;
 
@@ -9,7 +10,7 @@ const userStart = [230, 10];
 let currentPosition = userStart; 
 
 /*Ball Starting Position*/
-const ballStart = [270, 40];
+const ballStart = [280, 60];
 let ballCurrentPosition = ballStart;
 
 /*Create Block*/
@@ -25,21 +26,21 @@ class Block {
 
 /*Tier 1*/
 const blocks = [
-    new Block(10, 270),
-    new Block(120, 270),
-    new Block(230, 270),
-    new Block(340, 270),
-    new Block(450, 270),
-    new Block(10, 240),
-    new Block(120, 240),
-    new Block(230, 240),
-    new Block(340, 240),
-    new Block(450, 240),
-    new Block(10, 210),
-    new Block(120, 210),
-    new Block(230, 210),
-    new Block(340, 210),
-    new Block(450, 210),
+    new Block(10, 770),
+    new Block(120, 770),
+    new Block(230, 770),
+    new Block(340, 770),
+    new Block(450, 770),
+    new Block(10, 740),
+    new Block(120, 740),
+    new Block(230, 740),
+    new Block(340, 740),
+    new Block(450, 740),
+    new Block(10, 710),
+    new Block(120, 710),
+    new Block(230, 710),
+    new Block(340, 710),
+    new Block(450, 710),
 ]
 /*Tier 2*/
 /*const blocks = [
@@ -110,8 +111,6 @@ function drawUser() {
 /*Ball*/
 const ball = document.createElement('div')
 ball.classList.add('ball')
-ball.style.left =  ballCurrentPosition[0]+ 'px'
-ball.style.bottom = ballCrrentPosition[1] + 'px'
 drawBall();
 /*Affix or Append Ball into Playing Grid*/
 grid.appendChild(ball) 
