@@ -1,10 +1,21 @@
+/* Block Grid */
 .grid {
-    width: 600px;
+    width: 560px;
     height: 300px;
-    border: #002A70 1px;
+    border: solid #002A70 3px;
 }
 
+/* Block CSS */
 .block {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    background-color: #00C4BC;
+}
+
+/* Player Paddle */
+.paddle {
+    position: absolute;
     width: 100px;
     height: 20px;
     background-color: #00C4BC;
