@@ -4,6 +4,8 @@ const blockHeight = 20;
 const ballDiameter = 20;
 const boardWidth = 560;
 const boardHeight = 800;
+let xDirection = -2
+let yDirection = 2
 
 /*Assign user start position*/
 const userStart = [230, 10];
@@ -111,15 +113,52 @@ function drawUser() {
 /*Ball*/
 const ball = document.createElement('div')
 ball.classList.add('ball')
-drawBall();
 /*Affix or Append Ball into Playing Grid*/
 grid.appendChild(ball) 
+drawBall();
 
 /*Draw Ball*/
 function drawBall() {
     ball.style.left = currentPosition[0] + 'px';
     ball.style.bottom = currentPosition[1] + 'px';
 }
+/*Move Ball*/
+function moveBall() {
+    ballCurrentPosition[0] += xDirection
+    ballCurrentPosition[1] += yDirection
+    drawBall()
+    checkForCollisions()
+}
+
+timerID = setInterval(moveBall, 30)
+
+/*Collision Check*/
+function checkForCollisions() {
+    if (
+    ballCurrentPosition[0] >= (boardWidth - ballDiameter) || 
+    ballCurrentPosition[1] >= (boardHeight - ballDiameter)) {
+    changeDirection()
+}
+}
+function changeDirection() {
+    if (xDirection === 2 && yDirection === 2 ) {
+        yDirection = -2
+        return
+    }
+    if (xDirection === 2 && yDirection === -2) {
+        xDirection = -2
+        return
+    }
+    if (xDirection === -2 && yDirection === -2) {
+        yDirection = 2
+        return
+    }
+    if (xDirection === -2 && yDirection === 2) {
+        xDirection = 2
+        return
+    }
+}
+
 /*User Movement using switch case*/
 /*if function keeps the user paddle from going off screen*/
 function moveUser(e) {
@@ -140,12 +179,6 @@ function moveUser(e) {
 }
 
 document.addEventListener('keyup', moveUser)
-
-/*Ball Movement*/
-
-
-/*Collision Check*/
-
 
 /*Wall Collision Check*/
 
