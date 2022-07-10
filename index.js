@@ -7,6 +7,9 @@ const boardWidth = 560;
 const userStart = [230, 10];
 let currentPosition = userStart; 
 
+/*Ball Starting Position*/
+const ballStart = [270, 40];
+let ballCurrentPosition = ballStart;
 
 /*Create Block*/
 class Block {
@@ -74,10 +77,12 @@ const blocks = [
     new Block(340, 210),
     new Block(450, 210),
 */ 
+console.log(blocks[0])
+
 /*Draw Block*/
 function addBlock() {
     for (let i = 0; i < blocks.length; i++) {
-    const block = document.createElemenet("div")
+    const block = document.createElement("div")
     block.classList.add("block")
     block.style.left = blocks[i].bottomLeft[0] + "px";
     block.style.bottom = blocks[i].bottomLeft[1] + "px";
@@ -100,6 +105,12 @@ function drawUser () {
     user.style.bottom = currentPosition[1] + "px";
 }
 
+/*Draw Ball*/
+function drawBall() {
+    ball.style.left = currentPosition[0] + "px";
+    ball.style.bottom = currentPosition[1] + "px";
+}
+
 /*User Movement using switch case*/
 /*if function keeps the user paddle from going off screen*/
 function moveUser(e) {
@@ -112,9 +123,10 @@ function moveUser(e) {
             break;
         case "ArrowRight":
             if (currentPosition[0] < boardWidth - blockWidth) {
-                currentPosition[0] +=10
+                currentPosition[0] += 10
                 drawUser()
             }
+            break;
     }
 }
 
@@ -123,3 +135,10 @@ document.addEventListener("keyup", moveUser)
 /*Ball*/
 const ball = document.createElement("div")
 ball.classList.add("ball")
+ball.style.left =  ballCurrentPosition[0]+ "px"
+ball.style.bottom = ballCrrentPosition[1] + "px"
+drawBall();
+/*Affix or Append Ball into Playing Grid*/
+grid.appendChild(ball) 
+
+/*Ball Movement*/
