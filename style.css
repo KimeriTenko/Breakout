@@ -1,8 +1,9 @@
 /* Block Grid */
 .grid {
     width: 560px;
-    height: 300px;
-    border: solid #002A70 3px;
+    height: 800px;
+    border: solid #8B80F9 3px;
+    background-color: #1E1E24;
 }
 
 /* Block CSS */
@@ -14,9 +15,19 @@
 }
 
 /* Player Paddle */
-.paddle {
+.user {
     position: absolute;
     width: 100px;
     height: 20px;
-    background-color: #00C4BC;
+    background-color: #F8C0C8;
+}
+
+/* Ball */
+.ball {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 10 px;
+    background-color: #FFB800;
+
 }
