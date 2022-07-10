@@ -1,7 +1,8 @@
-const grid = document.querySelector("grid") 
+const grid = document.querySelector('.grid') 
 const blockWidth = 100;
 const blockHeight = 20;
 const boardWidth = 560;
+const boardHeight = 800;
 
 /*Assign user start position*/
 const userStart = [230, 10];
@@ -40,7 +41,6 @@ const blocks = [
     new Block(340, 210),
     new Block(450, 210),
 ]
-/*
 /*Tier 2*/
 /*const blocks = [
     new Block(10, 270),
@@ -77,40 +77,50 @@ const blocks = [
     new Block(340, 210),
     new Block(450, 210),
 */ 
-console.log(blocks[0])
 
-/*Draw Block*/
-function addBlock() {
+
+/*Draw Block next to each other, done by using the base element of the Block array*/
+function addBlocks() {
     for (let i = 0; i < blocks.length; i++) {
-    const block = document.createElement("div")
-    block.classList.add("block")
-    block.style.left = blocks[i].bottomLeft[0] + "px";
-    block.style.bottom = blocks[i].bottomLeft[1] + "px";
+    const block = document.createElement('div')
+    block.classList.add('block')
+    block.style.left = blocks[i].bottomLeft[0] + 'px'
+    block.style.bottom = blocks[i].bottomLeft[1] + 'px'
     grid.appendChild(block)
+    console.log(blocks[i].bottomLeft)
     }
 }
-addBlock()
+addBlocks();
+
 
 /*Add Player*/
-const user = document.createElement("div") 
-user.classList.add("user")
+const user = document.createElement('div') 
+user.classList.add('user')
+// user.style.left = currentPosition[0] + "px";
+// user.style.bottom = currentPosition[1] + "px";
 grid.appendChild(user)
-user.style.left = currentPosition[0] + "px";
-user.style.bottom = currentPosition[1] + "px";
-grid.appendChild(user)
+drawUser();
 
-/*Draw User*/
-function drawUser () {
-    user.style.left = currentPosition[0] + "px";
-    user.style.bottom = currentPosition[1] + "px";
+/*Draw Player*/
+function drawUser() {
+    user.style.left = currentPosition[0] + 'px';
+    user.style.bottom = currentPosition[1] + 'px';
 }
+
+/*Ball*/
+const ball = document.createElement('div')
+ball.classList.add('ball')
+ball.style.left =  ballCurrentPosition[0]+ 'px'
+ball.style.bottom = ballCrrentPosition[1] + 'px'
+drawBall();
+/*Affix or Append Ball into Playing Grid*/
+grid.appendChild(ball) 
 
 /*Draw Ball*/
 function drawBall() {
-    ball.style.left = currentPosition[0] + "px";
-    ball.style.bottom = currentPosition[1] + "px";
+    ball.style.left = currentPosition[0] + 'px';
+    ball.style.bottom = currentPosition[1] + 'px';
 }
-
 /*User Movement using switch case*/
 /*if function keeps the user paddle from going off screen*/
 function moveUser(e) {
@@ -130,15 +140,16 @@ function moveUser(e) {
     }
 }
 
-document.addEventListener("keyup", moveUser)
-
-/*Ball*/
-const ball = document.createElement("div")
-ball.classList.add("ball")
-ball.style.left =  ballCurrentPosition[0]+ "px"
-ball.style.bottom = ballCrrentPosition[1] + "px"
-drawBall();
-/*Affix or Append Ball into Playing Grid*/
-grid.appendChild(ball) 
+document.addEventListener('keyup', moveUser)
 
 /*Ball Movement*/
+
+
+/*Collision Check*/
+
+
+/*Wall Collision Check*/
+
+
+/*Check Player Collision*/
+

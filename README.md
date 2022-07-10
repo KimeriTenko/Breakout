@@ -9,10 +9,10 @@ It had three official sequels. Super Breakout featured multiple paddles and ball
 # Game Logic
 Player uses the paddle element to break through several rows of colored bricks.
 # MVP Criteria
-Player's "paddle" will move left and right, start ball movement and repell ball collisions. Gmae will have a score.
+Player's "paddle" will move left and right, start ball movement and repell ball collisions. Game will have a score.
 
 # Post-MVP Plans
-I would like to give the game elements a neon glow and simple outlines for a pleasant, modern feel. It would also be nice to make a custom art title screen. I would like to add other modes of game play ala Super Breakout style.
+I would like to give the game elements a neon glow and simple outlines for a pleasant, modern feel. It would also be nice to make a custom art title screen. I would like to add other modes of game play ala Super Breakout style. Would also be nice to add musical tones to block breakage.
 
 # Project Planning
 Breakout will use plain JavaScript, CSS, and HTML5 to render and animate the game. The game's main components will be broken down as follows:

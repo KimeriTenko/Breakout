@@ -1,11 +1,15 @@
 /* Block Grid */
 .grid {
+    position: absolute;
     width: 560px;
     height: 800px;
     border: solid #8B80F9 3px;
     background-color: #1E1E24;
+    margin-top: 100px;
+    display: grid; 
+    grid-template-columns: auto;
+    grid-gap: 10px;
 }
-
 /* Block CSS */
 .block {
     position: absolute;
