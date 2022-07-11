@@ -10,6 +10,15 @@
     grid-template-columns: auto;
     grid-gap: 10px;
 }
+
+/* Player Paddle */
+.user {
+    position: absolute;
+    width: 75px;
+    height: 20px;
+    background-color: #F8C0C8;
+}
+
 /* Block CSS */
 .block {
     position: absolute;
@@ -18,20 +27,34 @@
     background-color: #00C4BC;
 }
 
-/* Player Paddle */
-.user {
-    position: absolute;
-    width: 100px;
-    height: 20px;
-    background-color: #F8C0C8;
-}
-
 /* Ball */
 .ball {
     position: absolute;
     width: 20px;
     height: 20px;
-    border-radius: 10 px;
+    border-radius: 10px;
     background-color: #FFB800;
+}
+/* Start Button */
+/* .start-btn {
+    text-align: center;
+	display: inline-block;
+	margin:5px;
+    font-weight: bold;
+    padding: 10px 0 10px 10px ;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
 
 }
+.video-game-button:active, .start-btn:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
+} */

@@ -1,5 +1,5 @@
 const grid = document.querySelector('.grid') 
-const scoreDisplay= document.querySelector('#score')
+const scoreDisplay = document.querySelector('#score')
 const blockWidth = 100;
 const blockHeight = 20;
 const ballDiameter = 20;
@@ -9,12 +9,15 @@ let xDirection = -2
 let yDirection = 2
 let score = 0
 
+// /*Start Button*/
+// document.getElementById('start').addEventListener('click'), () => {}
+
 /*Assign user start position*/
 const userStart = [230, 10];
 let currentPosition = userStart; 
 
 /*Ball Starting Position*/
-const ballStart = [280, 60];
+const ballStart = [270, 40];
 let ballCurrentPosition = ballStart;
 
 /*Create Block*/
@@ -27,7 +30,6 @@ class Block {
     }
 }
 /*Every Block*//*Anchor Block*/
-
 /*Tier 1*/
 const blocks = [
     new Block(10, 770),
@@ -101,8 +103,6 @@ addBlocks();
 /*Add Player*/
 const user = document.createElement('div') 
 user.classList.add('user')
-// user.style.left = currentPosition[0] + "px";
-// user.style.bottom = currentPosition[1] + "px";
 grid.appendChild(user)
 drawUser();
 
@@ -111,6 +111,32 @@ function drawUser() {
     user.style.left = currentPosition[0] + 'px';
     user.style.bottom = currentPosition[1] + 'px';
 }
+/*Draw Ball*/
+function drawBall() {
+    ball.style.left = currentPosition[0] + 'px';
+    ball.style.bottom = currentPosition[1] + 'px';
+}
+
+/*User Movement using switch case*/
+/*if function keeps the user paddle from going off screen*/
+function moveUser(e) {
+    switch(e.key) {
+        case "ArrowLeft":
+            if (currentPosition[0] > 0) {
+                currentPosition[0] -= 10
+            drawUser()
+            }
+            break;
+        case "ArrowRight":
+            if (currentPosition[0] < boardWidth - blockWidth) {
+                currentPosition[0] += 10
+                drawUser()
+            }
+            break;
+    }
+}
+
+document.addEventListener('keydown', moveUser)
 
 /*Ball*/
 const ball = document.createElement('div')
@@ -119,11 +145,6 @@ ball.classList.add('ball')
 grid.appendChild(ball) 
 drawBall();
 
-/*Draw Ball*/
-function drawBall() {
-    ball.style.left = currentPosition[0] + 'px';
-    ball.style.bottom = currentPosition[1] + 'px';
-}
 /*Move Ball*/
 function moveBall() {
     ballCurrentPosition[0] += xDirection
@@ -131,8 +152,7 @@ function moveBall() {
     drawBall()
     checkForCollisions()
 }
-
-timerID = setInterval(moveBall, 30)
+timerID = setInterval(moveBall, 20)
 
 /*Collision Checks, block & wall. Using splice removes blocks visually from the array*/
 function checkForCollisions() {
@@ -140,13 +160,21 @@ function checkForCollisions() {
       if (
         (ballCurrentPosition[0] > blocks[i].bottomLeft[0] && ballCurrentPosition[0] < blocks[i].bottomRight[0]) &&
         (ballCurrentPosition[1] + ballDiameter) > blocks[1].bottomLeft[1] && ballCurrentPosition[1] < blocks[1]
-      )  {
+    )  {
         const allBlocks = Array.from(document.querySelectorAll('.block'))
         allBlocks[i].classList.remove('block')
         blocks.splice(i, 1)
         changeDirection()
         score++
         scoreDisplay.innerHTML = score
+
+        /*Check for Win*/
+
+        if (blocks.length == 0) {
+            scoreDisplay.innerHTML = 'You Win!'
+            clearInterval(timerId)
+            document.removeEventListener('keydown', moveUser)
+        }
       }
     }
     if (
@@ -156,6 +184,12 @@ function checkForCollisions() {
     ) {
     changeDirection()
     }
+}
+/*To Check Collisions between paddle and ball along x and y axises*/ 
+if ((ballCurrentPosition[0] > currentPosition[0] && ballCurrentPosition[0] + blockWidth) &&
+    (ballCurrentPosition[1] > currentPosition[1] && ballCurrentPosition[1] + blockHeight)
+) {
+    changeDirection()
 }
 /*Game Over Criteria*/
 if (ballCurrentPosition[1] <= 0) {
@@ -184,24 +218,5 @@ function changeDirection() {
     }
 }
 
-/*User Movement using switch case*/
-/*if function keeps the user paddle from going off screen*/
-function moveUser(e) {
-    switch(e.key) {
-        case "ArrowLeft":
-            if (currentPosition[0] > 0) {
-                currentPosition[0] -= 10
-            drawUser()
-            }
-            break;
-        case "ArrowRight":
-            if (currentPosition[0] < boardWidth - blockWidth) {
-                currentPosition[0] += 10
-                drawUser()
-            }
-            break;
-    }
-}
 
-document.addEventListener('keyup', moveUser)
 
