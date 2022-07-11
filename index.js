@@ -20,6 +20,8 @@ let currentPosition = userStart;
 const ballStart = [280, 40];
 let ballCurrentPosition = ballStart;
 
+let timerId
+
 /*Create Block*/
 class Block {
     constructor(xAxis, yAxis) {
@@ -85,20 +87,18 @@ const blocks = [
     new Block(450, 210),
 */ 
 
-
 /*Draw Block next to each other, done by using the base element of the Block array*/
 function addBlocks() {
-    for (let i = 0; i < blocks.length; i++) {
+  for (let i = 0; i < blocks.length; i++) {
     const block = document.createElement('div')
     block.classList.add('block')
     block.style.left = blocks[i].bottomLeft[0] + 'px'
     block.style.bottom = blocks[i].bottomLeft[1] + 'px'
     grid.appendChild(block)
     console.log(blocks[i].bottomLeft)
-    }
+  }
 }
 addBlocks();
-
 
 /*Add Player*/
 const user = document.createElement('div') 
@@ -120,7 +120,7 @@ function drawBall() {
 /*User Movement using switch case*/
 /*if function keeps the user paddle from going off screen*/
 function moveUser(e) {
-    switch(e.key) {
+    switch (e.key) {
         case "ArrowLeft":
             if (currentPosition[0] > 0) {
                 currentPosition[0] -= 10
@@ -133,8 +133,8 @@ function moveUser(e) {
                 drawUser()
             }
             break;
+        }
     }
-}
 
 document.addEventListener('keydown', moveUser)
 
@@ -150,26 +150,27 @@ function moveBall() {
     ballCurrentPosition[0] += xDirection
     ballCurrentPosition[1] += yDirection
     drawBall()
-    checkForCollisions()
+    checkForCollisions()                         
 }
-timerID = setInterval(moveBall, 20)
+timerID = setInterval(moveBall, 30)
 
 /*Collision Checks, block & wall. Using splice removes blocks visually from the array*/
 function checkForCollisions() {
     for (let i = 0; i < blocks.length; i++) {
       if (
-        (ballCurrentPosition[0] > blocks[i].bottomLeft[0] && ballCurrentPosition[0] < blocks[i].bottomRight[0]) &&
-        (ballCurrentPosition[1] + ballDiameter) > blocks[1].bottomLeft[1] && ballCurrentPosition[1] < blocks[1]
-    )  {
+        (ballCurrentPosition[0] > blocks[i].bottomLeft[0] && ballCurrentPosition[0] < blocks[i].bottomRight[0] &&
+        ((ballCurrentPosition[1] + ballDiameter) > blocks[i].bottomLeft[1] && ballCurrentPosition[1] < blocks[i].topLeft[1])
+    )    
+      )
+      {
         const allBlocks = Array.from(document.querySelectorAll('.block'))
         allBlocks[i].classList.remove('block')
-        blocks.splice(i, 1)
+        blocks.splice(i,1)
         changeDirection()
         score++
         scoreDisplay.innerHTML = score
 
         /*Check for Win*/
-
         if (blocks.length == 0) {
             scoreDisplay.innerHTML = 'You Win!'
             clearInterval(timerId)
@@ -183,20 +184,23 @@ function checkForCollisions() {
     ballCurrentPosition[0] <= 0
     ) {
     changeDirection()
-    }
 }
-/*To Check Collisions between paddle and ball along x and y axises*/ 
-if ((ballCurrentPosition[0] > currentPosition[0] && ballCurrentPosition[0] + blockWidth) &&
-    (ballCurrentPosition[1] > currentPosition[1] && ballCurrentPosition[1] + blockHeight)
-) {
+/*To Check Collisions between paddle and ball along x and y axises, i.e. ball won't pass through paddle*/ 
+if ((ballCurrentPosition[0] > currentPosition[0] && ballCurrentPosition[0] < currentPosition[0] + blockWidth) &&
+    (ballCurrentPosition[1] > currentPosition[1] && ballCurrentPosition[1] < currentPosition[1] + blockHeight)
+    )
+    {
     changeDirection()
-}
+    }
+
 /*Game Over Criteria*/
 if (ballCurrentPosition[1] <= 0) {
     clearInterval(timerId)
     scoreDisplay.innerHTML = 'Try Again'
-    document.removeElement 
-}
+    document.removeEventListener('keydown', moveUser)
+    }
+
+
 
 
 function changeDirection() {
@@ -219,4 +223,4 @@ function changeDirection() {
 }
 
 
-
+}
