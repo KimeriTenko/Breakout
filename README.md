@@ -23,11 +23,11 @@ javascript.js: this file will contain basic methods for collision detection and 
 # Date Goals
 Thu. 06/23 Create GitHub repository. Complete README.md.
 
-Sun. 06/26 Layout the skeleton for field.js to render and interact with the canvas, initializing a game loop that will requestAnimationFrame() and allow for animations. Once animations can be drawn, create bugblaster.js and have it respond to keypresses to move Player left and right, then create blaster.js and have bug blaster be able to shoot.
+Sun. 06/26 
 
-Tue. 06/28 Create bugs with enemies.js and have them enter the screen and go towards an empty space in the formation and remain in formation according to type. Create divergent spider,scorpion, and flea patterns. Implement dart collision detection so that enemies are destroyable and grant points.
+Tue. 06/28 
 
-Thu. 06/30 Introduce the capability for centipede to break formation, regrow head, and pursue separate paths downward toward the bug blaster with potential to cause a game over. Have the enemy re-enter formation if the attack misses. Polish the background and add in sound effects for blaster shots, dart collision, bug to blaster collision, and the main Centipede theme song.
+Thu. 06/30 
 
 Sun. 07/03 Deploy MVP to GitHub Pages.
 
