@@ -1,4 +1,5 @@
 const grid = document.querySelector('.grid') 
+const scoreDisplay= document.querySelector('#score')
 const blockWidth = 100;
 const blockHeight = 20;
 const ballDiameter = 20;
@@ -6,6 +7,7 @@ const boardWidth = 560;
 const boardHeight = 800;
 let xDirection = -2
 let yDirection = 2
+let score = 0
 
 /*Assign user start position*/
 const userStart = [230, 10];
@@ -132,14 +134,37 @@ function moveBall() {
 
 timerID = setInterval(moveBall, 30)
 
-/*Collision Check*/
+/*Collision Checks, block & wall. Using splice removes blocks visually from the array*/
 function checkForCollisions() {
+    for (let i = 0; i < blocks.length; i++) {
+      if (
+        (ballCurrentPosition[0] > blocks[i].bottomLeft[0] && ballCurrentPosition[0] < blocks[i].bottomRight[0]) &&
+        (ballCurrentPosition[1] + ballDiameter) > blocks[1].bottomLeft[1] && ballCurrentPosition[1] < blocks[1]
+      )  {
+        const allBlocks = Array.from(document.querySelectorAll('.block'))
+        allBlocks[i].classList.remove('block')
+        blocks.splice(i, 1)
+        changeDirection()
+        score++
+        scoreDisplay.innerHTML = score
+      }
+    }
     if (
     ballCurrentPosition[0] >= (boardWidth - ballDiameter) || 
-    ballCurrentPosition[1] >= (boardHeight - ballDiameter)) {
+    ballCurrentPosition[1] >= (boardHeight - ballDiameter) ||
+    ballCurrentPosition[0] <= 0
+    ) {
     changeDirection()
+    }
 }
+/*Game Over Criteria*/
+if (ballCurrentPosition[1] <= 0) {
+    clearInterval(timerId)
+    scoreDisplay.innerHTML = 'Try Again'
+    document.removeElement 
 }
+
+
 function changeDirection() {
     if (xDirection === 2 && yDirection === 2 ) {
         yDirection = -2
@@ -179,9 +204,4 @@ function moveUser(e) {
 }
 
 document.addEventListener('keyup', moveUser)
-
-/*Wall Collision Check*/
-
-
-/*Check Player Collision*/
 
